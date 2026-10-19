@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restauração</title>
+  <style>
+    :root {
+      --bg: #f4efe8;
+      --primary: #7a4b2a;
+      --primary-dark: #4f2d1d;
+      --accent: #d9b38c;
+      --text: #2b211d;
+      --white: #ffffff;
+      --card: #fffaf5;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: 0 auto;
+    }
+
+    header {
+      background: linear-gradient(135deg, #2f1d17, #7a4b2a);
+      color: var(--white);
+      padding: 18px 0;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #f3e6d9;
+      font-size: 0.95rem;
+    }
+
+    .hero {
+      padding: 80px 0 60px;
+      background: linear-gradient(to right, rgba(122,75,42,0.15), rgba(217,179,140,0.12));
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      margin: 0 0 18px;
+      color: var(--primary-dark);
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+      color: #4c3a34;
+    }
+
+    .btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary-dark);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    .hero-card {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 18px 40px rgba(49, 31, 25, 0.1);
+    }
+
+    .hero-card h3 {
+      margin-top: 0;
+      color: var(--primary-dark);
+      font-size: 1.5rem;
+    }
+
+    .hero-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .hero-card li {
+      padding: 10px 0;
+      border-bottom: 1px solid #f0e2d5;
+      color: #4a3a33;
+    }
+
+    .section {
+      padding: 70px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      color: var(--primary-dark);
+      margin-bottom: 10px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 28px 22px;
+      box-shadow: 0 10px 25px rgba(89, 56, 42, 0.08);
+      border: 1px solid #eedfce;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: var(--primary-dark);
+    }
+
+    .card p {
+      color: #5d4a42;
+      margin-bottom: 0;
+    }
+
+    .about {
+      background: #f8f0e8;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .about-box {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 12px 30px rgba(71, 47, 34, 0.08);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(120px, 1fr));
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .stat {
+      text-align: center;
+      background: #fff;
+      border-radius: 12px;
+      padding: 18px 10px;
+      border: 1px solid #f0e0cf;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.8rem;
+      color: var(--primary);
+    }
+
+    .contact {
+      background: linear-gradient(135deg, #2d201a, #774d37);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .contact h2 {
+      margin-top: 0;
+      font-size: clamp(2rem, 4vw, 3rem);
+    }
+
+    .contact p {
+      max-width: 700px;
+      margin: 0 auto 24px;
+      color: #f2e1d1;
+    }
+
+    .contact a {
+      color: #fff;
+      font-weight: bold;
+    }
+
+    footer {
+      background: #1d140f;
+      color: #f8efe9;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 760px) {
+      .hero-content,
+      .about-grid,
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <div class="logo">Restauração</div>
+      <nav class="nav-links">
+        <a href="#servicos">Serviços</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#contacto">Contacto</a>
+        <a href="index.html">Início</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-content">
+        <div>
+          <h1>Restauro e recuperação para o seu espaço</h1>
+          <p>
+            Ajudamos a recuperar, renovar e valorizar casas, escritórios e espaços comerciais,
+            com soluções de qualidade, rigor e atendimento personalizado.
+          </p>
+          <div class="btns">
+            <a class="btn btn-primary" href="#contacto">Solicitar orçamento</a>
+            <a class="btn btn-secondary" href="#servicos">Ver serviços</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <h3>O que fazemos?</h3>
+          <ul>
+            <li>Reparação estrutural</li>
+            <li>Pintura e acabamentos</li>
+            <li>Reabilitação de imóveis</li>
+            <li>Renovação de cozinhas e casas de banho</li>
+            <li>Projetos personalizados</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicos" class="section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Nossos serviços</h2>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <h3>Reabilitação</h3>
+            <p>Recuperação de espaços antigos com soluções práticas, duráveis e com bom acabamento.</p>
+          </article>
+
+          <article class="card">
+            <h3>Reparação</h3>
+            <p>Consertos e retoques em paredes, tetos, divisórias, pisos e elementos de estrutura.</p>
+          </article>
+
+          <article class="card">
+            <h3>Renovação</h3>
+            <p>Transformação de ambientes com uma abordagem funcional, moderna e adaptada ao seu gosto.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre" class="section about">
+      <div class="container about-grid">
+        <div class="about-box">
+          <div class="section-title" style="text-align: left; margin-bottom: 20px;">
+            <h2>Porque escolher-nos</h2>
+          </div>
+          <p>
+            Somos uma equipa especializada em restauração e renovação de espaços, com foco no detalhe,
+            na qualidade dos materiais e na satisfação do cliente.
+          </p>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>10+</strong>
+              Anos
+            </div>
+            <div class="stat">
+              <strong>250</strong>
+              Projetos
+            </div>
+            <div class="stat">
+              <strong>95%</strong>
+              Satisfação
+            </div>
+          </div>
+        </div>
+
+        <div class="about-box">
+          <h3>Processo simples</h3>
+          <p>1. Contacta-nos e descreve o projeto.</p>
+          <p>2. Elaboramos uma proposta e orçamento.</p>
+          <p>3. Executamos a obra com acompanhamento.</p>
+          <p>4. Entregamos o espaço renovado e pronto a usar.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="section contact">
+      <div class="container">
+        <h2>Vamos restaurar o seu espaço?</h2>
+        <p>
+          Entre em contacto para pedir um orçamento ou esclarecer qualquer dúvida sobre os nossos serviços.
+        </p>
+        <a href="mailto:info@restauracao.com">info@restauracao.com</a>
+        <br><br>
+        <a href="tel:+351000000000">+351 000 000 000</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Restauração - Todos os direitos reservados
+  </footer>
+
+</body>
+</html>
